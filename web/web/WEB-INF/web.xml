@@ -6,7 +6,11 @@
            version="2.5">
 
     <servlet>
-        <servlet-name>HelloWorldServlet</servlet-name>
-        <servlet-class>ro.gameon.HelloWorldServlet</servlet-class>
+        <servlet-name>UsersServlet</servlet-name>
+        <servlet-class>ro.gameon.UsersServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>UsersServlet</servlet-name>
+        <url-pattern>/users/*</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -10,6 +10,9 @@
         <element id="artifact" artifact-name="web:war exploded" />
       </element>
       <element id="module-output" name="ejb" />
+      <element id="directory" name="lib">
+        <element id="library" level="project" name="JPA 2.0-2.0" />
+      </element>
     </root>
   </artifact>
 </component>

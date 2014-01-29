@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Hibernate Validator-5.0.1" type="BeanValidation">
+    <properties version="5.0.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ejb/lib/hibernate-validator-annotation-processor-5.0.1.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ejb/lib/hibernate-validator-5.0.1.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ejb/lib/hibernate-validator-cdi-5.0.1.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ejb/lib/validation-api-1.1.0.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ejb/lib/jboss-logging-3.1.1.GA.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ejb/lib/javax.el-api-2.2.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/ejb/lib/classmate-0.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

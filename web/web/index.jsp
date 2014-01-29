@@ -11,8 +11,8 @@
     <title></title>
 </head>
 <body>
-<form method="get" action="helloworld">
-    <input type="submit" value="Say Hello"/>
+<form method="get" action="users">
+    <input type="submit" value="List users"/>
 </form>
 </body>
 </html>
