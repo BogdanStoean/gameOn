@@ -1,29 +1,42 @@
 package ro.gameon.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
  * Created by bogdan on 1/29/14.
  */
 @Entity
+@Table(name = "USERs")
 public class User implements Serializable {
-    @Id
-    @GeneratedValue
+	@Id
+	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ_GEN")
+	@SequenceGenerator(name = "USER_SEQ_GEN", sequenceName = "SEQ_USER", allocationSize = 1)
     private Long id;
 
+	@Column(name = "USERNAME", nullable = false)
     private String username;
 
+	@Column(name = "PASSWORD", nullable = false)
     private String password;
 
+	@Column(name = "FIRSTNAME", nullable = false)
     private String firstName;
 
+	@Column(name = "LASTNAME", nullable = false)
     private String lastName;
 
+	@Column(name = "EMAIL", nullable = false)
     private String email;
 
+	@Column(name = "ADDRESS", nullable = false)
     private String address;
 
     public Long getId() {

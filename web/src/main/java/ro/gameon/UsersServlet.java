@@ -3,7 +3,7 @@ package ro.gameon;
 import ro.gameon.entity.User;
 import ro.gameon.service.UserService;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.util.List;
@@ -16,21 +16,21 @@ import java.util.List;
 @WebServlet(name = "UsersServlet", urlPatterns = "/users")
 public class UsersServlet extends javax.servlet.http.HttpServlet {
 
-    @Inject
-    private UserService userserviceBean;
+	@EJB
+	private UserService userserviceBean;
 
-    protected void doPost(javax.servlet.http.HttpServletRequest request,
-                          javax.servlet.http.HttpServletResponse response)
-            throws javax.servlet.ServletException, IOException {
+	protected void doPost(javax.servlet.http.HttpServletRequest request,
+			javax.servlet.http.HttpServletResponse response)
+			throws javax.servlet.ServletException, IOException {
 
-    }
+	}
 
-    @Override
-    protected void doGet(javax.servlet.http.HttpServletRequest request,
-                         javax.servlet.http.HttpServletResponse response)
-            throws javax.servlet.ServletException, IOException {
-        List<User> users = userserviceBean.listAll();
-        request.setAttribute("users", users);
-        request.getRequestDispatcher("users.jsp").forward(request, response);
-    }
+	@Override
+	protected void doGet(javax.servlet.http.HttpServletRequest request,
+			javax.servlet.http.HttpServletResponse response)
+			throws javax.servlet.ServletException, IOException {
+		List<User> users = userserviceBean.listAll();
+		request.setAttribute("users", users);
+		request.getRequestDispatcher("users.jsp").forward(request, response);
+	}
 }

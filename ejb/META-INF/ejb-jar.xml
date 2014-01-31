@@ -6,7 +6,7 @@
          version="3.1">
     <enterprise-beans>
         <session>
-            <ejb-name>HelloWorldEJB</ejb-name>
+            <ejb-name>UserServiceBean</ejb-name>
             <ejb-class>ro.gameon.service.UserServiceBean</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
