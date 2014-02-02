@@ -10,6 +10,6 @@ import java.util.List;
 public class UserDao extends GenericDao {
 
     public List<User> listAll() {
-        return executeQuery("from User u", User.class);
+        return executeQuery("from User", User.class);
     }
 }

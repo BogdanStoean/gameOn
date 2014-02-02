@@ -85,4 +85,13 @@ public abstract class GenericDao {
             query.setParameter(i + 1, parameters[i]);
         }
     }
+
+    protected <V> List<V> listPaginated(String jpql, Class<V> clazz, int start, int limit,
+                                        Object... parameters) {
+        TypedQuery<V> query = entityManager.createQuery(jpql, clazz);
+        query.setFirstResult(start);
+        query.setMaxResults(limit);
+        addQueryParameters(query, parameters);
+        return query.getResultList();
+    }
 }

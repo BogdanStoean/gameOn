@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
-        <servlet-class>ro.gameon.UsersServlet</servlet-class>
+        <servlet-class>ro.gameon.users.ListUsersServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UsersServlet</servlet-name>
