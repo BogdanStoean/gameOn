@@ -3,7 +3,7 @@
   Date: 2/2/14
   Time: 4:26 PM
 --%>
-<c:set var="appPath" value="${pageContext.request.contextPath}"/>
+
 <html>
 <head>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8"/>
@@ -16,21 +16,13 @@
     <%--<link href="extjs/resources/css/ext-all.css" type="text/css" rel="stylesheet"/>--%>
     <%--<link href="extjs/resources/css/ext-all-neptune.css" type="text/css" rel="stylesheet"/>--%>
     <link href="extjs/resources/css/ext-all-access.css" type="text/css" rel="stylesheet"/>
+    <%--<script src="js/config/ext-config.js" type="text/javascript"></script>--%>
     <script type="text/javascript">
-        Ext.Loader.setConfig({
-            enable: true,
-            disableCaching: false,
-            paths: {
-                'Ext': 'extjs/src',
-                'Ext.gameon': 'js/gameon'
-            }
-        });
+        var appPath = '/game-on';
+
     </script>
+
 
     <title>GAME ON SHOP</title>
 </head>
-
-<body>
-
-</body>
 </html>

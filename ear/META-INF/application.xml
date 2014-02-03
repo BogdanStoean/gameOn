@@ -10,7 +10,7 @@
     <module id="web-Web">
         <web>
             <web-uri>web.war</web-uri>
-            <context-root>webWeb</context-root>
+            <context-root>game-on</context-root>
         </web>
     </module>
 </application>

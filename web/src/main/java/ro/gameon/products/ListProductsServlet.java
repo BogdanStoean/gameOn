@@ -16,19 +16,19 @@ import java.util.List;
 /**
  * Created by bogdan on 2/2/14.
  */
-@WebServlet(name = "ListProductsServlet", urlPatterns = "/products")
+@WebServlet("/products/list.json")
 public class ListProductsServlet extends HttpServlet {
 
-    @EJB
-    private ProductService productService;
+	@EJB
+	private ProductService productService;
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("application/json; charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        ObjectMapper mapper = new ObjectMapper();
-        List<Product> products = productService.listProducts(0, 10);
-        mapper.writeValue(response.getOutputStream(), new DataTableResult<Product>(products));
 
-    }
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.setContentType("application/json; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		List<Product> products = productService.listProducts(0, 10);
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.writeValue(response.getOutputStream(), new DataTableResult<Product>(products));
+	}
 }

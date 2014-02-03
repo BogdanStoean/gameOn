@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-           version="2.5">
+         version="2.5">
 
     <servlet>
         <servlet-name>UsersServlet</servlet-name>
@@ -13,4 +13,15 @@
         <servlet-name>UsersServlet</servlet-name>
         <url-pattern>/users/*</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ListProductsServlet</servlet-name>
+        <servlet-class>ro.gameon.products.ListProductsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListProductsServlet</servlet-name>
+        <url-pattern>/products/*</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

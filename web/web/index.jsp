@@ -5,52 +5,88 @@
 --%>
 <%@ include file="WEB-INF/jsp/common/init.jsp" %>
 <script type="text/javascript">
-    Ext.require(['Ext.gameon.Product']);
-    Ext.onReady(function () {
-        var gridColumns, productStore, grid;
 
+    Ext.define('Product', {
+        extend: 'Ext.data.Model',
+        fields: [
+            'id',
+            'productCode',
+            'productName',
+            'description',
+            'category.categoryName',
+            'brand.brandName'
+        ],
+        idProperty: 'id'
+    });
+
+    Ext.onReady(function () {
+        var gridColumns, productStore, grid, background;
         gridColumns = [
             {
                 header: 'Id',
-                width: 100,
+                flex: 1,
                 dataIndex: 'id',
                 sortable: false,
                 hidden: true
             },
             {
                 header: 'Nume produs',
-                width: 300,
+                flex: 1,
                 dataIndex: 'productName',
                 sortable: false
             },
             {
                 header: 'Categorie',
-                width: 400,
+                flex: 1,
                 dataIndex: 'category.categoryName',
                 sortable: false
             },
             {
                 header: 'Marca',
-                width: 400,
+                flex: 1,
                 dataIndex: 'brand.brandName',
                 sortable: false
             }
         ];
 
 
-        productStore = Ext.create('Ext.gameon.model.ProductStore', {
-            url: '/web/products'
+        productStore = Ext.create('Ext.data.Store', {
+            model: 'Product',
+            proxy: {
+                type: 'ajax',
+                url: appPath + '/products/list.json',
+                reader: {
+                    type: 'json',
+                    totalProperty: 'totalRecords',
+                    idProperty: 'id',
+                    root: 'records'
+                },
+                writer: {
+                    type: 'json',
+                    encode: true
+                }
+            },
+            autoLoad: true
         });
 
 
         grid = new Ext.grid.GridPanel({
             store: productStore,
-            renderTo: 'listGrid',
             columns: gridColumns,
-            height: 200,
-            width: 1000,
             title: 'Lista produse'
         });
+
+        background = new Ext.panel.Panel({
+            minHeight: 1000,
+            renderTo: Ext.getBody(),
+            bodyStyle: {
+                backgroundColor: "gray"
+            },
+            items: [
+                grid
+            ]
+        });
+
     });
 </script>
-<div id="listGrid" style="margin: 20px"></div>
+<%--<div id="listGrid" style="margin: 20px"></div>--%>

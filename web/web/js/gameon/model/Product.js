@@ -1,4 +1,4 @@
-/**
+ /**
  * Created by bogdan on 2/2/14.
  */
 Ext.define('Ext.gameon.model.Product', {
@@ -15,7 +15,7 @@ Ext.define('Ext.gameon.model.Product', {
 });
 
 
-Ext.define('Ext.gameon.model.ProductStore', {
+ Ext.define('Ext.gameon.model.ProductStore', {
     extend: 'Ext.gameon.common.GenericStore',
     model: 'Ext.gameon.model.Product',
     constructor: function (config) {
