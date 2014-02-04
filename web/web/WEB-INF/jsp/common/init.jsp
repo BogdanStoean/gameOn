@@ -12,11 +12,7 @@
     <meta http-equiv="no-cache"/>
 
     <script src="extjs/ext-all.js" type="text/javascript"></script>
-    <%--<link rel="shortcut icon" type="image/ico" href="favicon.ico" />--%>
-    <%--<link href="extjs/resources/css/ext-all.css" type="text/css" rel="stylesheet"/>--%>
-    <%--<link href="extjs/resources/css/ext-all-neptune.css" type="text/css" rel="stylesheet"/>--%>
     <link href="extjs/resources/css/ext-all-access.css" type="text/css" rel="stylesheet"/>
-    <%--<script src="js/config/ext-config.js" type="text/javascript"></script>--%>
     <script type="text/javascript">
         var appPath = '/game-on';
 

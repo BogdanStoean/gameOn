@@ -20,7 +20,7 @@
     });
 
     Ext.onReady(function () {
-        var gridColumns, productStore, grid, background;
+        var gridColumns, productStore, grid, background, menu, banner, slideShow;
         gridColumns = [
             {
                 header: 'Id',
@@ -30,19 +30,19 @@
                 hidden: true
             },
             {
-                header: 'Nume produs',
+                header: 'Name',
                 flex: 1,
                 dataIndex: 'productName',
                 sortable: false
             },
             {
-                header: 'Categorie',
+                header: 'Category',
                 flex: 1,
                 dataIndex: 'category.categoryName',
                 sortable: false
             },
             {
-                header: 'Marca',
+                header: 'Publisher',
                 flex: 1,
                 dataIndex: 'brand.brandName',
                 sortable: false
@@ -72,8 +72,25 @@
 
         grid = new Ext.grid.GridPanel({
             store: productStore,
-            columns: gridColumns,
-            title: 'Lista produse'
+            columns: gridColumns
+        });
+
+        menu = new Ext.tab.Panel({
+            items: [
+                {
+                    title: 'All games',
+                    flex: 1
+                },
+                {
+                    title: 'Favorites games',
+                    flex: 1
+                }
+            ]
+        });
+
+
+        banner = new Ext.panel.Panel({
+            minHeight: 100
         });
 
         background = new Ext.panel.Panel({
@@ -82,11 +99,17 @@
             bodyStyle: {
                 backgroundColor: "gray"
             },
+            layout: {
+                type: 'vbox',
+                align: 'stretch',
+                padding: 10
+            },
             items: [
+                menu,
+                banner,
                 grid
             ]
         });
 
     });
 </script>
-<%--<div id="listGrid" style="margin: 20px"></div>--%>
