@@ -13,11 +13,16 @@ import java.util.List;
 @Stateless
 public class ProductServiceBean implements ProductService {
 
-    @Inject
-    private ProductDao productDao;
+	@Inject
+	private ProductDao productDao;
 
-    @Override
-    public List<Product> listProducts(int start, int limit) {
-        return productDao.listAllProduct(start, limit);
-    }
+	@Override
+	public List<Product> listProducts(int start, int limit) {
+		return productDao.listAllProduct(start, limit);
+	}
+
+	@Override
+	public Long countProducts() {
+		return productDao.countAllProducts();
+	}
 }

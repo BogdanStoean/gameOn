@@ -23,5 +23,15 @@
         <url-pattern>/products/*</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ProductDetailsPageServlet</servlet-name>
+        <servlet-class>ro.gameon.products.ProductDetailsPageServlet</servlet-class>
+    </servlet>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>ProductDetailsPageServlet</servlet-name>-->
+        <!--<url-pattern>/productDetails/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+
 
 </web-app>

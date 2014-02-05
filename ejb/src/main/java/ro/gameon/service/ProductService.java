@@ -12,4 +12,5 @@ import java.util.List;
 public interface ProductService {
 
     List<Product> listProducts(int start, int limit);
+	Long countProducts();
 }

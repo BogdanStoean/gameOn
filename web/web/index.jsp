@@ -3,7 +3,7 @@
   Date: 1/24/14
   Time: 10:30 AM
 --%>
-<%@ include file="WEB-INF/jsp/common/init.jsp" %>
+<%@ include file="jsp/common/init.jsp" %>
 <script type="text/javascript">
 
     Ext.define('Product', {
@@ -11,6 +11,7 @@
         fields: [
             'id',
             'productCode',
+            'pictureLink',
             'productName',
             'description',
             'category.categoryName',
@@ -20,8 +21,17 @@
     });
 
     Ext.onReady(function () {
-        var gridColumns, productStore, grid, background, menu, banner, slideShow;
+        var gridColumns, productStore, grid, background, menu, banner;
         gridColumns = [
+            {
+                dataIndex: 'pictureLink',
+                sortable: false,
+                align: 'center',
+                flex: 0.5,
+                renderer: function (value) {
+                    return '<div><img src="' + value + '"></div>';
+                }
+            },
             {
                 header: 'Id',
                 flex: 1,
@@ -33,19 +43,36 @@
                 header: 'Name',
                 flex: 1,
                 dataIndex: 'productName',
+                align: 'center',
                 sortable: false
             },
             {
                 header: 'Category',
                 flex: 1,
                 dataIndex: 'category.categoryName',
+                align: 'center',
                 sortable: false
             },
             {
                 header: 'Publisher',
                 flex: 1,
                 dataIndex: 'brand.brandName',
+                align: 'center',
                 sortable: false
+            },
+            {
+                xtype: 'actioncolumn',
+                header: 'Product details',
+                align: 'center',
+                flex: 0.5,
+                items: [
+                    {
+                        icon: 'images/icons/fam/book.png',
+                        handler: function () {
+                            window.location = appPath + '/productDetails/getPage';
+                        }
+                    }
+                ]
             }
         ];
 
@@ -72,7 +99,17 @@
 
         grid = new Ext.grid.GridPanel({
             store: productStore,
-            columns: gridColumns
+            columns: gridColumns,
+            minHeight: 400,
+            maxHeight: 500,
+            dockedItems: [
+                {
+                    xtype: 'pagingtoolbar',
+                    store: productStore,
+                    dock: 'bottom',
+                    displayInfo: true
+                }
+            ]
         });
 
         menu = new Ext.tab.Panel({
@@ -82,7 +119,7 @@
                     flex: 1
                 },
                 {
-                    title: 'Favorites games',
+                    title: 'Favorite games',
                     flex: 1
                 }
             ]
@@ -90,7 +127,53 @@
 
 
         banner = new Ext.panel.Panel({
-            minHeight: 100
+            minHeight: 100,
+            layout: 'column',
+            items: [
+                {
+                    columnWidth: 0.80
+                },
+                new Ext.form.Panel({
+                    title: 'Sign in',
+                    bodyPadding: 1,
+                    url: '/login',
+                    defaultType: 'textfield',
+                    items: [
+                        {
+                            fieldLabel: 'Username',
+                            name: 'username',
+                            allowBlank: false
+                        },
+                        {
+                            fieldLabel: 'Password',
+                            inputType: 'password',
+                            name: 'password'
+
+                        }
+                    ],
+
+                    buttons: [
+                        {
+                            text: 'Sign in',
+                            formBind: true, //only enabled once the form is valid
+                            disabled: true,
+                            handler: function () {
+                                var form = this.up('form').getForm();
+                                if (form.isValid()) {
+                                    form.submit({
+                                        success: function (form, action) {
+
+                                        },
+                                        failure: function (form, action) {
+
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    ]
+                })
+            ]
         });
 
         background = new Ext.panel.Panel({
@@ -105,11 +188,12 @@
                 padding: 10
             },
             items: [
-                menu,
                 banner,
+                menu,
                 grid
             ]
         });
 
-    });
+    })
+    ;
 </script>

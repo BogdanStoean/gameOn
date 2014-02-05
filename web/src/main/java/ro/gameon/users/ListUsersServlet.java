@@ -32,6 +32,6 @@ public class ListUsersServlet extends HttpServlet {
 			throws javax.servlet.ServletException, IOException {
 		List<User> users = userserviceBean.listAll();
 		request.setAttribute("users", users);
-		request.getRequestDispatcher("users.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/users/users.jsp").forward(request, response);
 	}
 }

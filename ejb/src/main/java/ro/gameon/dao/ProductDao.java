@@ -9,7 +9,11 @@ import java.util.List;
  */
 public class ProductDao extends GenericDao {
 
-    public List<Product> listAllProduct(int start, int limit) {
-        return listPaginated("from Product", Product.class, start, limit);
-    }
+	public List<Product> listAllProduct(int start, int limit) {
+		return listPaginated("from Product", Product.class, start, limit);
+	}
+
+	public Long countAllProducts() {
+		return executeSingleResultQuery("select count(p) from Product p", Long.class);
+	}
 }

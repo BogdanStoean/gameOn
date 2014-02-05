@@ -14,84 +14,84 @@ import java.util.List;
  */
 public abstract class GenericDao {
 
-    @PersistenceContext(unitName = "persistenceUnit")
-    protected EntityManager entityManager;
+	@PersistenceContext(unitName = "persistenceUnit")
+	protected EntityManager entityManager;
 
-    public <T> void persist(T entity) {
-        entityManager.persist(entity);
-    }
+	public <T> void persist(T entity) {
+		entityManager.persist(entity);
+	}
 
-    public <T> void persistCollection(Collection<T> entities) {
-        for (T entity : entities) {
-            persist(entity);
-        }
-    }
+	public <T> void persistCollection(Collection<T> entities) {
+		for(T entity : entities) {
+			persist(entity);
+		}
+	}
 
-    public <T> T merge(T entity) {
-        return entityManager.merge(entity);
-    }
+	public <T> T merge(T entity) {
+		return entityManager.merge(entity);
+	}
 
-    public <T> Collection<T> mergeCollection(Collection<T> entities) {
-        Collection<T> mergedResults = new ArrayList<T>(entities.size());
-        for (T entity : entities) {
-            mergedResults.add(merge(entity));
-        }
-        return mergedResults;
-    }
+	public <T> Collection<T> mergeCollection(Collection<T> entities) {
+		Collection<T> mergedResults = new ArrayList<T>(entities.size());
+		for(T entity : entities) {
+			mergedResults.add(merge(entity));
+		}
+		return mergedResults;
+	}
 
-    public <T, PK extends Serializable> void removeByPK(PK id, Class<T> clazz) {
-        Object ref = entityManager.find(clazz, id);
-        remove(ref);
-    }
+	public <T, PK extends Serializable> void removeByPK(PK id, Class<T> clazz) {
+		Object ref = entityManager.find(clazz, id);
+		remove(ref);
+	}
 
-    public <T> void remove(T entity) {
-        entityManager.remove(entity);
-    }
+	public <T> void remove(T entity) {
+		entityManager.remove(entity);
+	}
 
-    public <T> void removeCollection(Collection<T> entities) {
-        for (T entity : entities) {
-            remove(entity);
-        }
-    }
+	public <T> void removeCollection(Collection<T> entities) {
+		for(T entity : entities) {
+			remove(entity);
+		}
+	}
 
-    public <T, PK extends Serializable> T findById(PK id, Class<T> clazz) {
-        return entityManager.find(clazz, id);
-    }
+	public <T, PK extends Serializable> T findById(PK id, Class<T> clazz) {
+		return entityManager.find(clazz, id);
+	}
 
-    public void flush() {
-        entityManager.flush();
-    }
+	public void flush() {
+		entityManager.flush();
+	}
 
-    protected <V> List<V> executeQuery(String jpql, Class<V> clazz, Object... parameters) {
-        TypedQuery<V> query = entityManager.createQuery(jpql, clazz);
-        addQueryParameters(query, parameters);
-        return query.getResultList();
-    }
+	protected <V> List<V> executeQuery(String jpql, Class<V> clazz, Object... parameters) {
+		TypedQuery<V> query = entityManager.createQuery(jpql, clazz);
+		addQueryParameters(query, parameters);
+		return query.getResultList();
+	}
 
-    protected <V> V executeSingleResultQuery(String jpql, Class<V> clazz, Object... parameters) {
-        TypedQuery<V> query = entityManager.createQuery(jpql, clazz);
-        addQueryParameters(query, parameters);
-        return query.getSingleResult();
-    }
+	protected <V> V executeSingleResultQuery(String jpql, Class<V> clazz, Object... parameters) {
+		TypedQuery<V> query = entityManager.createQuery(jpql, clazz);
+		addQueryParameters(query, parameters);
+		return query.getSingleResult();
+	}
 
-    protected void executeUpdateQuery(String jpql, Object... parameters) {
-        Query query = entityManager.createQuery(jpql);
-        addQueryParameters(query, parameters);
-        query.executeUpdate();
-    }
+	protected void executeUpdateQuery(String jpql, Object... parameters) {
+		Query query = entityManager.createQuery(jpql);
+		addQueryParameters(query, parameters);
+		query.executeUpdate();
+	}
 
-    private void addQueryParameters(Query query, Object[] parameters) {
-        for (int i = 0; i < parameters.length; i++) {
-            query.setParameter(i + 1, parameters[i]);
-        }
-    }
+	private void addQueryParameters(Query query, Object[] parameters) {
+		for(int i = 0; i < parameters.length; i++) {
+			query.setParameter(i + 1, parameters[i]);
+		}
+	}
 
-    protected <V> List<V> listPaginated(String jpql, Class<V> clazz, int start, int limit,
-                                        Object... parameters) {
-        TypedQuery<V> query = entityManager.createQuery(jpql, clazz);
-        query.setFirstResult(start);
-        query.setMaxResults(limit);
-        addQueryParameters(query, parameters);
-        return query.getResultList();
-    }
+	protected <V> List<V> listPaginated(String jpql, Class<V> clazz, int start, int limit,
+			Object... parameters) {
+		TypedQuery<V> query = entityManager.createQuery(jpql, clazz);
+		query.setFirstResult(start);
+		query.setMaxResults(limit);
+		addQueryParameters(query, parameters);
+		return query.getResultList();
+	}
 }
