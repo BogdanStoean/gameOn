@@ -15,11 +15,16 @@ import java.util.List;
 @Stateless
 public class UserServiceBean implements UserService {
 
-    @Inject
-    private UserDao userDao;
+	@Inject
+	private UserDao userDao;
 
-    @Override
-    public List<User> listAll() {
-        return userDao.listAll();
-    }
+	@Override
+	public List<User> listAll() {
+		return userDao.listAll();
+	}
+
+	@Override
+	public User getByUsernameAndPassword(String username, String password) {
+		return userDao.getByUsernameAndPassword(username, password);
+	}
 }

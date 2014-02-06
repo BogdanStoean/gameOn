@@ -11,5 +11,7 @@ import java.util.List;
 @Local
 public interface UserService {
 
-    List<User> listAll();
+	List<User> listAll();
+
+	User getByUsernameAndPassword(String username, String password);
 }

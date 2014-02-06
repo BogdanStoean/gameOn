@@ -67,6 +67,12 @@
                                     });
                                 }
                             }
+                        },
+                        {
+                            text: 'Sign up',
+                            handler: function () {
+                                window.location = appPath + '/createAccount';
+                            }
                         }
                     ]
                 })

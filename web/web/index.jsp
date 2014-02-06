@@ -69,7 +69,7 @@
                     {
                         icon: 'images/icons/fam/book.png',
                         handler: function () {
-                            window.location = appPath + '/productDetails/getPage';
+                            window.location = appPath + '/getPage';
                         }
                     }
                 ]
@@ -169,6 +169,12 @@
                                         }
                                     });
                                 }
+                            }
+                        },
+                        {
+                            text: 'Sign up',
+                            handler: function () {
+                                window.location = appPath + '/createAccount';
                             }
                         }
                     ]

@@ -14,7 +14,7 @@ import java.util.List;
  * Date: 1/24/14
  * Time: 10:43 AM
  */
-@WebServlet(name = "ListUsersServlet", urlPatterns = "/users")
+@WebServlet("/users")
 public class ListUsersServlet extends HttpServlet {
 
 	@EJB

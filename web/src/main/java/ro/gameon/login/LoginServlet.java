@@ -1,4 +1,4 @@
-package ro.gameon.products;
+package ro.gameon.login;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,11 +9,11 @@ import java.io.IOException;
 
 /**
  * User: bogdan
- * Date: 2/5/14
- * Time: 8:07 PM
+ * Date: 2/6/14
+ * Time: 6:09 PM
  */
-@WebServlet(name = "ProductDetailsPageServlet", urlPatterns = "/getPage")
-public class ProductDetailsPageServlet extends HttpServlet {
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
 
 
 	@Override
@@ -21,7 +21,7 @@ public class ProductDetailsPageServlet extends HttpServlet {
 			ServletException {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
-		request.getRequestDispatcher("productDetails.jsp").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }

@@ -11,6 +11,7 @@ import java.util.List;
 @Local
 public interface ProductService {
 
-    List<Product> listProducts(int start, int limit);
+	List<Product> listProducts(int start, int limit);
+
 	Long countProducts();
 }
