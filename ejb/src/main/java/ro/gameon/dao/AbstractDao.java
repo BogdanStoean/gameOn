@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by bogdan on 1/29/14.
  */
-public abstract class GenericDao {
+public abstract class AbstractDao {
 
 	@PersistenceContext(unitName = "persistenceUnit")
 	protected EntityManager entityManager;

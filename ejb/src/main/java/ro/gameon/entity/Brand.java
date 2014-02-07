@@ -1,13 +1,14 @@
 package ro.gameon.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by bogdan on 2/2/14.
  */
 @Entity
 @Table(name = "BRANDS")
-public class Brand {
+public class Brand implements Serializable{
 
 
     @Id

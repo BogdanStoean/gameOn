@@ -1,46 +1,44 @@
-package ro.gameon.entity;
+package ro.gameon.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import java.io.Serializable;
+import ro.gameon.entity.User;
 
 /**
- * Created by bogdan on 1/29/14.
+ * User: bogdan
+ * Date: 2/7/14
+ * Time: 8:17 PM
  */
-@Entity
-@Table(name = "USERS")
-public class User implements Serializable {
-	@Id
-	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ_GEN")
-	@SequenceGenerator(name = "USER_SEQ_GEN", sequenceName = "SEQ_USER", allocationSize = 1)
+public class UserDTO {
+
 	private Long id;
 
-	@Column(name = "USERNAME", nullable = false)
 	private String username;
 
-	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 
-	@Column(name = "FIRSTNAME")
 	private String firstName;
 
-	@Column(name = "LASTNAME")
 	private String lastName;
 
-	@Column(name = "EMAIL")
 	private String email;
 
-	@Column(name = "ADDRESS")
 	private String address;
 
-	@Column(name = "ROLE", nullable = false)
 	private String role;
+
+	public UserDTO() {
+
+	}
+
+	public UserDTO(String username, String password, String firstName, String lastName, String email,
+			String address, String role) {
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.role = role;
+	}
 
 	public Long getId() {
 		return id;
@@ -105,4 +103,18 @@ public class User implements Serializable {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	public User getUserFromDTO() {
+		User user = new User();
+		user.setUsername(this.getUsername());
+		user.setPassword(this.getPassword());
+		user.setAddress(this.getAddress());
+		user.setEmail(this.getEmail());
+		user.setFirstName(this.getFirstName());
+		user.setLastName(this.getLastName());
+		user.setRole(this.getRole());
+		return user;
+	}
+
+
 }

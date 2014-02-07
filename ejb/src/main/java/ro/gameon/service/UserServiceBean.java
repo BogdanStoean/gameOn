@@ -27,4 +27,9 @@ public class UserServiceBean implements UserService {
 	public User getByUsernameAndPassword(String username, String password) {
 		return userDao.getByUsernameAndPassword(username, password);
 	}
+
+	@Override
+	public Long saveOrUpdate(User user) {
+		return userDao.merge(user).getId();
+	}
 }

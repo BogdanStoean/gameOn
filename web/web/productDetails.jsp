@@ -8,21 +8,7 @@
 <script type="text/javascript">
 
     Ext.onReady(function () {
-        var background, menu, banner;
-
-        menu = new Ext.tab.Panel({
-            items: [
-                {
-                    title: 'All games',
-                    flex: 1
-                },
-                {
-                    title: 'Favorite games',
-                    flex: 1
-                }
-            ]
-        });
-
+        var background, banner;
 
         banner = new Ext.panel.Panel({
             minHeight: 100,
@@ -130,8 +116,7 @@
                 padding: 10
             },
             items: [
-                banner,
-                menu
+                banner
             ]
         });
 

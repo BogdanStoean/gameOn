@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by bogdan on 1/29/14.
  */
-public class UserDao extends GenericDao {
+public class UserDao extends AbstractDao {
 
 	public List<User> listAll() {
 		return executeQuery("from User", User.class);

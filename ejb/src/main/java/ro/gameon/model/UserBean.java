@@ -11,15 +11,16 @@ public class UserBean {
 
 	private Long userId;
 	private String username;
+	private String role;
 
 
-	public UserBean(Long userId, String username) {
+	public UserBean(Long userId, String username, String role) {
 		this.userId = userId;
 		this.username = username;
 	}
 
 	public UserBean(User user) {
-		this(user.getId(), user.getUsername());
+		this(user.getId(), user.getUsername(), user.getRole());
 	}
 
 	public Long getUserId() {
@@ -36,5 +37,13 @@ public class UserBean {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

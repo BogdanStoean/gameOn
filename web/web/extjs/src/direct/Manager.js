@@ -81,7 +81,7 @@ Ext.define('Ext.direct.Manager', {
         TRANSPORT: 'xhr',
         PARSE: 'parse',
         DATA: 'data',
-        LOGIN: 'authentication',
+        LOGIN: 'login',
         SERVER: 'exception'
     },
     

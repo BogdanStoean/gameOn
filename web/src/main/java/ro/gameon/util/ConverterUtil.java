@@ -1,7 +1,5 @@
 package ro.gameon.util;
 
-import sun.org.mozilla.javascript.internal.ast.TryStatement;
-
 /**
  * User: bogdan
  * Date: 2/5/14
@@ -20,6 +18,18 @@ public class ConverterUtil {
 		}
 
 		return 0;
+	}
+
+	public static final Long getLongFromString(String value) {
+		Long ret = null;
+		if (value != null && !value.equals("")) {
+			ret = Long.parseLong(value);
+			if (ret != null) {
+				return ret;
+			}
+		}
+
+		return ret;
 	}
 
 

@@ -1,6 +1,7 @@
 package ro.gameon.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by bogdan on 2/2/14.
@@ -8,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "CATEGORIES")
-public class Category {
+public class Category implements Serializable{
 
     @Id
     @Column(name = "ID")

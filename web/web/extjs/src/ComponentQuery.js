@@ -60,10 +60,10 @@ Build date: 2013-05-16 14:36:50 (f9be68accb407158ba2b1be2c226a6ce1f649314)
  * itself is applied, then next selector expression, etc. It is possible to combine
  * relationship operators in complex selectors:
  *
- *     window[title="Input form"] textfield[name=authentication] ^ form > button[action=submit]
+ *     window[title="Input form"] textfield[name=login] ^ form > button[action=submit]
  *
  * That selector can be read this way: Find a window with title "Input form", in that
- * window find a TextField with name "authentication" at any depth (including subpanels and/or
+ * window find a TextField with name "login" at any depth (including subpanels and/or
  * FieldSets), then find an `Ext.form.Panel` that is a parent of the TextField, and in
  * that form find a direct child that is a button with custom property `action` set to
  * value "submit".

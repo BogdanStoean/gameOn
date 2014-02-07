@@ -116,7 +116,7 @@
                     title: 'Create account',
                     bodyPadding: 1,
                     minWidth: 500,
-                    url: '/saveAccount.json',
+                    url: appPath + '/saveAccount.json',
                     defaultType: 'textfield',
                     items: [
                         {
@@ -138,6 +138,14 @@
                         {
                             fieldLabel: 'Last name',
                             name: 'lastName'
+                        },
+                        {
+                            fieldLabel: 'Email',
+                            name: 'email'
+                        },
+                        {
+                            fieldLabel: 'Address',
+                            name: 'address'
                         }
 
 
@@ -153,7 +161,7 @@
                                 if (form.isValid()) {
                                     form.submit({
                                         success: function (form, action) {
-
+                                            window.location = appPath;
                                         },
                                         failure: function (form, action) {
 

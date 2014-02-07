@@ -14,4 +14,6 @@ public interface UserService {
 	List<User> listAll();
 
 	User getByUsernameAndPassword(String username, String password);
+
+	Long saveOrUpdate(User user);
 }

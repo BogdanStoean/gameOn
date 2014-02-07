@@ -120,10 +120,33 @@ Ext.onReady(function () {
                 flex: 1
             },
             {
-                title: 'Favorite games',
+                title: 'My games',
                 flex: 1
             }
-        ]
+        ],
+        listeners: {
+            tabchange: function (tabPanel, newCard, oldCard, eOpts) {
+
+                if (newCard.title == 'All games') {
+                    productStore.load({
+                        params: {
+                            start: 0,
+                            limit: 25,
+                            tabId: 0
+                        }
+                    });
+                } else {
+                    productStore.load({
+                        params: {
+                            start: 0,
+                            limit: 25,
+                            tabId: 1,
+                            userId: '${loggedUser.userBean.userId}'
+                        }
+                    });
+                }
+            }
+        }
     });
 
     banner = new Ext.panel.Panel({

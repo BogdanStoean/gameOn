@@ -14,4 +14,8 @@ public interface ProductService {
 	List<Product> listProducts(int start, int limit);
 
 	Long countProducts();
+
+	List<Product> listProductsByUserId(int start, int limit, Long userId);
+
+	Long countProductsByUserId(Long userId);
 }
