@@ -114,7 +114,6 @@
                 },
                 new Ext.form.Panel({
                     title: 'Create account',
-
                     bodyPadding: 1,
                     minWidth: 500,
                     url: appPath + '/saveAccount.json',
