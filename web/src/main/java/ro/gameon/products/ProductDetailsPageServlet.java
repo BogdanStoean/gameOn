@@ -1,5 +1,10 @@
 package ro.gameon.products;
 
+import ro.gameon.entity.Product;
+import ro.gameon.service.ProductService;
+import ro.gameon.util.ConverterUtil;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,12 +21,18 @@ import java.io.IOException;
 public class ProductDetailsPageServlet extends HttpServlet {
 
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
-			ServletException {
-		response.setContentType("application/xhtml+xml; charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		request.getRequestDispatcher("productDetails.jsp").forward(request, response);
-	}
+    @EJB
+    private ProductService productService;
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
+            ServletException {
+        response.setContentType("application/xhtml+xml; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        Long productId = ConverterUtil.getLongFromString(request.getParameter("productId"));
+        Product product = productService.getById(productId);
+        request.getSession().setAttribute("product", product);
+        request.getRequestDispatcher("productDetails.jsp").forward(request, response);
+    }
 
 }

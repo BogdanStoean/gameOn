@@ -5,10 +5,11 @@
 --%>
 <%@ include file="/jsp/common/include.jsp" %>
 <jsp:include page="/jsp/common/init.jsp"/>
+<c:set var="product" value="${sessionScope.product}"/>
 <script type="text/javascript">
 
     Ext.onReady(function () {
-        var background, banner;
+        var background, banner, productDetailsPanel;
 
         banner = new Ext.panel.Panel({
             minHeight: 100,
@@ -104,6 +105,42 @@
             ]
         });
 
+        productDetailsPanel = new Ext.form.Panel({
+            title: 'Product details',
+            items: [
+                {
+                    xtype: 'displayfield',
+                    fieldLabel: 'Product name',
+                    value: '${product.productName}'
+                },
+                {
+
+                    xtype: 'displayfield',
+                    fieldLabel: 'Price',
+                    value: '${product.price}'
+                },
+                {
+                    xtype: 'displayfield',
+                    fieldLabel: 'Category',
+                    value: '${product.category.categoryName}'
+                },
+                {
+                    xtype: 'displayfield',
+                    fieldLabel: 'Brand',
+                    value: '${product.brand.brandName}'
+                },
+                {
+                    xtype: 'image',
+                    src: '${product.bannerLink}'
+                },
+                {
+                    xtype: 'displayfield'
+                    fieldLabel: 'Description',
+                    value: '${product.description}'
+                }
+            ]
+        });
+
         background = new Ext.panel.Panel({
             minHeight: 1000,
             renderTo: Ext.getBody(),
@@ -116,7 +153,7 @@
                 padding: 10
             },
             items: [
-                banner
+                banner, productDetailsPanel
             ]
         });
 

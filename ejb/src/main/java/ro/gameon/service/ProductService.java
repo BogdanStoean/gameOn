@@ -11,11 +11,13 @@ import java.util.List;
 @Local
 public interface ProductService {
 
-	List<Product> listProducts(int start, int limit);
+    List<Product> listProducts(int start, int limit);
 
-	Long countProducts();
+    Long countProducts();
 
-	List<Product> listProductsByUserId(int start, int limit, Long userId);
+    List<Product> listProductsByUserId(int start, int limit, Long userId);
 
-	Long countProductsByUserId(Long userId);
+    Long countProductsByUserId(Long userId);
+
+    Product getById(Long productId);
 }

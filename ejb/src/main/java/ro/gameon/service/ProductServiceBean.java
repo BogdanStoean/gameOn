@@ -16,35 +16,40 @@ import java.util.List;
 @Stateless
 public class ProductServiceBean implements ProductService {
 
-	@Inject
-	private ProductDao productDao;
+    @Inject
+    private ProductDao productDao;
 
 
-	@Inject
-	private UserProductDao userProductDao;
+    @Inject
+    private UserProductDao userProductDao;
 
-	@Override
-	public List<Product> listProducts(int start, int limit) {
-		return productDao.listAllProduct(start, limit);
-	}
+    @Override
+    public List<Product> listProducts(int start, int limit) {
+        return productDao.listAllProduct(start, limit);
+    }
 
-	@Override
-	public Long countProducts() {
-		return productDao.countAllProducts();
-	}
+    @Override
+    public Long countProducts() {
+        return productDao.countAllProducts();
+    }
 
-	@Override
-	public List<Product> listProductsByUserId(int start, int limit, Long userId) {
-		List<Product> products = new ArrayList<Product>();
-		List<UserProduct> userProducts = userProductDao.listProductsByUserId(start, limit, userId);
-		for(UserProduct userProduct : userProducts) {
-			products.add(userProduct.getProduct());
-		}
-		return products;
-	}
+    @Override
+    public List<Product> listProductsByUserId(int start, int limit, Long userId) {
+        List<Product> products = new ArrayList<Product>();
+        List<UserProduct> userProducts = userProductDao.listProductsByUserId(start, limit, userId);
+        for (UserProduct userProduct : userProducts) {
+            products.add(userProduct.getProduct());
+        }
+        return products;
+    }
 
-	@Override
-	public Long countProductsByUserId(Long userId) {
-		return userProductDao.countProductsByUserId(userId);
-	}
+    @Override
+    public Long countProductsByUserId(Long userId) {
+        return userProductDao.countProductsByUserId(userId);
+    }
+
+    @Override
+    public Product getById(Long productId) {
+        return productDao.findById(productId, Product.class);
+    }
 }

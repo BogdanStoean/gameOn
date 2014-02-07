@@ -69,8 +69,9 @@ Ext.onReady(function () {
             items: [
                 {
                     icon: 'images/icons/fam/book.png',
-                    handler: function () {
-                        window.location = appPath + '/getPage';
+                    handler: function (grid, rowIndex, colIndex) {
+                        var rec = grid.getStore().getAt(rowIndex);
+                        window.location = appPath + '/getPage?productId=' + rec.get('id');
                     }
                 }
             ]
