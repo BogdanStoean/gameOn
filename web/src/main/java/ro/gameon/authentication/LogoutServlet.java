@@ -1,4 +1,7 @@
-package ro.gameon.users;
+package ro.gameon.authentication;
+
+import ro.gameon.model.LoginBean;
+import ro.gameon.util.SessionUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +12,19 @@ import java.io.IOException;
 
 /**
  * User: bogdan
- * Date: 2/6/14
- * Time: 10:20 AM
+ * Date: 2/7/14
+ * Time: 4:35 PM
  */
-@WebServlet("/createAccount")
-public class CreateAccountPageServlet extends HttpServlet {
+@WebServlet("/logout")
+public class LogoutServlet extends HttpServlet {
+
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
 			ServletException {
 		response.setContentType("application/xhtml+xml; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		request.getRequestDispatcher("createAccount.jsp").forward(request, response);
+		SessionUtil.setLoggedUser(request, null);
 	}
 
 }

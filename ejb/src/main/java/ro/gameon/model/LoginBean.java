@@ -1,5 +1,6 @@
 package ro.gameon.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,7 +9,7 @@ import java.util.Set;
  * Date: 2/6/14
  * Time: 6:27 PM
  */
-public class LoginBean {
+public class LoginBean implements Serializable {
 
 	private UserBean userBean;
 	private Set<Long> shoppingCart = new HashSet<Long>();

@@ -3,7 +3,7 @@
   Date: 2/2/14
   Time: 4:26 PM
 --%>
-
+<%--<%@ include file="include.jsp" %>--%>
 <html>
 <head>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8"/>
@@ -18,7 +18,6 @@
 
     </script>
 
-
-    <title>GAME ON SHOP</title>
+    <title>GAME ON SHOP </title>
 </head>
 </html>

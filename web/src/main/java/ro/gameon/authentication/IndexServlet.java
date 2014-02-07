@@ -1,4 +1,4 @@
-package ro.gameon.login;
+package ro.gameon.authentication;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,17 +9,17 @@ import java.io.IOException;
 
 /**
  * User: bogdan
- * Date: 2/6/14
- * Time: 6:09 PM
+ * Date: 2/7/14
+ * Time: 1:45 PM
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/index")
+public class IndexServlet extends HttpServlet {
 
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
 			ServletException {
-		response.setContentType("text/html");
+		response.setContentType("application/xhtml+xml; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
