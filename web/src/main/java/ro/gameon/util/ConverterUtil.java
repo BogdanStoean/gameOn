@@ -32,5 +32,16 @@ public class ConverterUtil {
 		return ret;
 	}
 
+	public static final Double getDoubleFromString(String value) {
+		Double ret = null;
+		if (value != null && !value.equals("")) {
+			ret = Double.parseDouble(value);
+			if (ret != null) {
+				return ret;
+			}
+		}
+
+		return ret;
+	}
 
 }

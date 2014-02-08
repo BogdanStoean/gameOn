@@ -42,6 +42,13 @@ public class User implements Serializable {
 	@Column(name = "ROLE", nullable = false)
 	private String role;
 
+	public User() {
+	}
+
+	public User(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

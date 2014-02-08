@@ -2,7 +2,7 @@ package ro.gameon.util;
 
 import java.util.List;
 
-public class DataTableResult<T> extends AJAXResult {
+public class DataTableResult<T> extends AJAXResponse {
 
 	public long totalRecords;
 
@@ -11,7 +11,7 @@ public class DataTableResult<T> extends AJAXResult {
 	private DataTableResult() {
 		super(null, null);
 	}
-	
+
 	public DataTableResult(String status, String message, List<T> results,
 			long totalRecords) {
 		super(status, message);

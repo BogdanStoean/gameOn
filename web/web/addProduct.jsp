@@ -1,25 +1,75 @@
 <%--
+  Created by IntelliJ IDEA.
   User: bogdan
-  Date: 2/5/14
-  Time: 8:12 PM
+  Date: 2/8/14
+  Time: 11:30 AM
+  To change this template use File | Settings | File Templates.
 --%>
 <%@ include file="/jsp/common/include.jsp" %>
 <jsp:include page="/jsp/common/init.jsp"/>
 <c:set var="product" value="${sessionScope.product}"/>
+<c:set var="productId" value="${sessionScope.productId}"/>
 <script type="text/javascript">
-Ext.define('Comment', {
+
+Ext.define('Brand', {
     extend: 'Ext.data.Model',
     fields: [
-        'id',
-        'comment'
+        {name: 'id', type: 'int'},
+        'brandCode',
+        'brandName'
+    ],
+    idProperty: 'id'
+});
+
+Ext.define('Category', {
+    extend: 'Ext.data.Model',
+    fields: [
+        {name: 'id', type: 'int'},
+        'categoryCode',
+        'categoryName'
     ],
     idProperty: 'id'
 });
 
 
 Ext.onReady(function () {
-    var background, banner, productDetailsPanel, commentsPanel, commentForm,
-            commentsGrid, commentStore;
+    var background, banner, productFormPanel, brandStore, categoryStore;
+
+
+    brandStore = Ext.create('Ext.data.Store', {
+        model: 'Brand',
+        proxy: {
+            type: 'ajax',
+            url: appPath + '/brands/list.json',
+            reader: {
+                type: 'json',
+                idProperty: 'id'
+            },
+            writer: {
+                type: 'json',
+                encode: true
+            }
+        },
+        autoLoad: true
+    });
+
+    categoryStore = Ext.create('Ext.data.Store', {
+        model: 'Category',
+        proxy: {
+            type: 'ajax',
+            url: appPath + '/categories/list.json',
+            reader: {
+                type: 'json',
+                idProperty: 'id'
+            },
+            writer: {
+                type: 'json',
+                encode: true
+            }
+        },
+        autoLoad: true
+    });
+
 
     banner = new Ext.panel.Panel({
         minHeight: 100,
@@ -116,38 +166,80 @@ Ext.onReady(function () {
         ]
     });
 
-    productDetailsPanel = new Ext.form.Panel({
-        title: 'Product details',
+    productFormPanel = new Ext.form.Panel({
+        title: 'Add product',
         minHeight: 500,
+        layout: {
+            type: 'vbox',
+            align: 'left',
+            padding: 10
+        },
+        defaults: {
+            minWidth: 1000
+        },
         items: [
             {
-                xtype: 'displayfield',
+                xtype: 'numberfield',
+                hidden: true,
+                name: 'id',
+                value:${productId}
+
+            },
+            {
+                xtype: 'textfield',
                 fieldLabel: 'Product name',
-                value: '${product.productName}'
+                value: '${product.productName}',
+                name: 'productName',
+                allowBlank: false
             },
             {
 
-                xtype: 'displayfield',
+                xtype: 'textfield',
                 fieldLabel: 'Price',
-                value: '${product.price}'
+                name: 'price',
+                value: Ext.util.Format.number('${product.price}', '0.00'),
+                allowBlank: false
             },
             {
-                xtype: 'displayfield',
+                xtype: 'combobox',
                 fieldLabel: 'Category',
-                value: '${product.category.categoryName}'
+                store: categoryStore,
+                queryMode: 'local',
+                displayField: 'categoryName',
+                name: 'categoryId',
+                editable: false,
+                valueField: 'id',
+                value: Ext.util.Format.number('${product.category.id}', '0'),
+                allowBlank: false
             },
             {
-                xtype: 'displayfield',
+                xtype: 'combobox',
                 fieldLabel: 'Brand',
-                value: '${product.brand.brandName}'
+                store: brandStore,
+                editable: false,
+                queryMode: 'local',
+                displayField: 'brandName',
+                name: 'brandId',
+                valueField: 'id',
+                value: Ext.util.Format.number('${product.brand.id}', '0'),
+                allowBlank: false
             },
             {
-                xtype: 'image',
-                src: '${product.bannerLink}'
+                xtype: 'textfield',
+                fieldLabel: 'Banner details picture',
+                name: 'bannerLink',
+                value: '${product.bannerLink}'
             },
             {
-                xtype: 'displayfield',
+                xtype: 'textfield',
+                fieldLabel: 'Banner grid picture',
+                name: 'pictureLink',
+                value: '${product.pictureLink}'
+            },
+            {
+                xtype: 'textareafield',
                 fieldLabel: 'Description',
+                name: 'description',
                 value: '${product.description}'
             },
             {
@@ -159,11 +251,36 @@ Ext.onReady(function () {
                         columnWidth: 0.4
                     },
                     {
-                        text: 'Back',
+                        text: 'Cancel',
                         columnWidth: 0.1,
-                        minWidth: 50,
                         handler: function () {
-                            window.location = appPath + '/index';
+                            window.location = appPath;
+                        }
+                    },
+                    {
+                        text: 'Save',
+                        columnWidth: 0.1,
+                        formBind: true,
+                        disabled: true,
+                        jsonSubmit: true,
+                        handler: function () {
+                            var form = this.up('form').getForm();
+                            if (form.isValid()) {
+
+                                //noinspection JSValidateTypes
+                                Ext.Ajax.request({
+                                    url: appPath + '/rest/product/saveProduct.json',
+                                    method: "POST",
+                                    headers: { 'Content-Type': 'application/json' },
+                                    jsonData: Ext.encode(form.getValues()),
+                                    success: function (response, opts) {
+                                        window.location = appPath;
+                                    },
+                                    failure: function (response, opts) {
+
+                                    }
+                                });
+                            }
                         }
                     },
                     {
@@ -172,79 +289,6 @@ Ext.onReady(function () {
                     }
                 ]
             }
-        ]
-    });
-
-    commentForm = new Ext.form.Panel({
-        url: appPath + '/comment/save',
-        items: [
-            {
-                xtype: 'textareafield',
-                name: 'comment',
-                fieldLabel: 'Comment'
-            }
-        ],
-        buttons: [
-            {
-                text: 'Save',
-                handler: function () {
-                    var form = this.up('form').getForm();
-                    if (form.isValid()) {
-                        form.submit({
-                            success: function (form, action) {
-                                window.location = appPath + '/getPage?productId=${product.id}';
-                            },
-                            failure: function (form, action) {
-
-                            }
-                        });
-                    }
-                }
-            }
-        ]
-    });
-
-    commentStore = Ext.create('Ext.data.Store', {
-        model: 'Comment',
-        proxy: {
-            type: 'ajax',
-            url: appPath + '/comments/list.json',
-            reader: {
-                type: 'json',
-                totalProperty: 'totalRecords',
-                idProperty: 'id',
-                root: 'records'
-            },
-            writer: {
-                type: 'json',
-                encode: true
-            }
-        },
-        autoLoad: true
-    });
-
-    commentsGrid = new Ext.grid.GridPanel({
-        store: commentStore,
-        columns: [
-            {
-                header: 'Comment',
-                flex: 1,
-                dataIndex: 'comment',
-                align: 'center',
-                sortable: false
-            }
-        ],
-        minHeight: 400,
-        maxHeight: 500
-    });
-
-    commentsPanel = new Ext.panel.Panel({
-        title: 'Comments',
-        items: [
-            <c:if test="${not empty loggedUser}">
-            commentForm,
-            </c:if>
-            commentsGrid
         ]
     });
 
@@ -260,7 +304,7 @@ Ext.onReady(function () {
             padding: 10
         },
         items: [
-            banner, productDetailsPanel, commentsPanel
+            banner, productFormPanel
         ]
     });
 

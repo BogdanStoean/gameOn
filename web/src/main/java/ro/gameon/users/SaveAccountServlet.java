@@ -1,9 +1,11 @@
 package ro.gameon.users;
 
 import ro.gameon.dto.UserDTO;
-import ro.gameon.entity.User;
+import ro.gameon.model.LoginBean;
 import ro.gameon.model.Role;
+import ro.gameon.service.LoginService;
 import ro.gameon.service.UserService;
+import ro.gameon.util.SessionUtil;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -25,6 +27,11 @@ public class SaveAccountServlet extends HttpServlet {
 	@EJB
 	private UserService userService;
 
+
+	@EJB
+	private LoginService loginService;
+
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
 			ServletException {
@@ -38,6 +45,7 @@ public class SaveAccountServlet extends HttpServlet {
 		String address = request.getParameter("address");
 		UserDTO userDTO = new UserDTO(username, password, firstName, lastName, email, address, Role.USER.toString());
 		userService.saveOrUpdate(userDTO.getUserFromDTO());
-
+		LoginBean loginBean = loginService.doLogin(username, password);
+		SessionUtil.setLoggedUser(request, loginBean);
 	}
 }

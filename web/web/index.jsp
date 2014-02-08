@@ -76,6 +76,57 @@ Ext.onReady(function () {
                 }
             ]
         }
+        <c:if test="${not empty loggedUser and loggedUser.userBean.role eq 'ADMIN'}">
+        ,
+        {
+            xtype: 'actioncolumn',
+            header: 'Edit',
+            align: 'center',
+            flex: 0.5,
+            items: [
+                {
+                    icon: 'images/icons/silk/application_edit.png',
+                    handler: function (grid, rowIndex, colIndex) {
+                        var rec = grid.getStore().getAt(rowIndex);
+                        window.location = appPath + '/addProduct?productId=' + rec.get('id');
+                    }
+                }
+            ]
+        }
+
+        </c:if>
+        <c:if test="${not empty loggedUser and loggedUser.userBean.role eq 'USER'}">
+        ,
+        {
+            xtype: 'actioncolumn',
+            header: 'Add to cart',
+            align: 'center',
+            flex: 0.5,
+            items: [
+                {
+                    icon: 'images/icons/silk/cart_add.png',
+                    handler: function (grid, rowIndex, colIndex) {
+                        var rec = grid.getStore().getAt(rowIndex);
+                        //noinspection JSValidateTypes
+                        Ext.Ajax.request({
+                            url: appPath + '/addToCart.json',
+                            method: "GET",
+                            params: {
+                                productId: rec.get('id')
+                            },
+                            success: function (response, opts) {
+                                window.location = appPath;
+                            },
+                            failure: function (response, opts) //noinspection JSValidateTypes
+                            {
+
+                            }
+                        });
+                    }
+                }
+            ]
+        }
+        </c:if>
     ];
 
 
@@ -111,6 +162,24 @@ Ext.onReady(function () {
                 dock: 'bottom',
                 displayInfo: true
             }
+            <c:if test="${not empty loggedUser and loggedUser.userBean.role eq 'ADMIN'}">
+            ,
+            {
+                xtype: 'toolbar',
+                dock: 'top',
+                items: [
+                    {
+                        xtype: 'button',
+                        text: 'Add product',
+                        handler: function () {
+                            window.location = appPath + '/addProduct?productId=0';
+                        }
+                    }
+                ]
+            }
+
+            </c:if>
+
         ]
     });
 
@@ -119,11 +188,14 @@ Ext.onReady(function () {
             {
                 title: 'All games',
                 flex: 1
-            },
+            }
+            <c:if test="${not empty loggedUser and loggedUser.userBean.role eq 'USER'}">
+            ,
             {
                 title: 'My games',
                 flex: 1
             }
+            </c:if>
         ],
         listeners: {
             tabchange: function (tabPanel, newCard, oldCard, eOpts) {
@@ -168,9 +240,25 @@ Ext.onReady(function () {
                 items: [
                     {
                         xtype: 'displayfield',
-                        fieldLabel: 'Logged user',
+                        fieldLabel: 'Welcome',
                         value: '${loggedUser.userBean.username}'
                     }
+                    <c:if test="${not empty loggedUser and loggedUser.userBean.role eq 'USER'}">
+                    ,
+                    {
+                        xtype: 'toolbar',
+                        items: [
+                            {
+                                xtype: 'button',
+                                text: 'CART(${loggedUser.shoppingCartSize})',
+                                handler: function () {
+                                    window.location = appPath + '/createOrder';
+                                }
+                            }
+                        ]
+                    }
+
+                    </c:if>
                 ],
                 buttons: [
                     {

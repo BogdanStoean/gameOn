@@ -1,8 +1,7 @@
-package ro.gameon.authentication;
+package ro.gameon.comments;
 
-import ro.gameon.model.LoginBean;
-import ro.gameon.service.LoginService;
-import ro.gameon.util.SessionUtil;
+import ro.gameon.entity.Comment;
+import ro.gameon.service.stateful.CommentService;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -14,25 +13,24 @@ import java.io.IOException;
 
 /**
  * User: bogdan
- * Date: 2/6/14
- * Time: 6:09 PM
+ * Date: 2/8/14
+ * Time: 6:40 PM
  */
-@WebServlet("/authentication")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/comment/save")
+public class AddCommentServlet extends HttpServlet {
 
 
-	@EJB
-	private LoginService loginService;
+	@EJB(lookup = "java:app/ejb/CommentServiceBean!ro.gameon.service.stateful.CommentService")
+	private CommentService commentService;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException,
 			ServletException {
 		response.setContentType("application/xhtml+xml; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		LoginBean loginBean = loginService.doLogin(username, password);
-		SessionUtil.setLoggedUser(request, loginBean);
+		String comm = request.getParameter("comment");
+		Comment comment = new Comment();
+		comment.setComment(comm);
+		commentService.addComment(comment);
 	}
-
 }

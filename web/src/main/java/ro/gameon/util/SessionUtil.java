@@ -16,7 +16,7 @@ public class SessionUtil {
 	}
 
 	public static final LoginBean getLoggedUser(HttpServletRequest request) {
-		return (LoginBean) request.getAttribute("_gameOnLoggedUser");
+		return (LoginBean) request.getSession().getAttribute("_gameOnLoggedUser");
 
 	}
 

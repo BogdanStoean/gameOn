@@ -1,6 +1,12 @@
 package ro.gameon.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -8,43 +14,51 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "BRANDS")
-public class Brand implements Serializable{
+public class Brand implements Serializable {
 
 
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BRAND_SEQ_GEN")
-    @SequenceGenerator(name = "BRAND_SEQ_GEN", sequenceName = "SEQ_BRAND", allocationSize = 1)
-    private Long id;
+	@Id
+	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BRAND_SEQ_GEN")
+	@SequenceGenerator(name = "BRAND_SEQ_GEN", sequenceName = "SEQ_BRAND", allocationSize = 1)
+	private Long id;
 
-    @Column(name = "BRAND_CODE", nullable = false)
-    private String brandCode;
+	@Column(name = "BRAND_CODE", nullable = false)
+	private String brandCode;
 
-    @Column(name = "BRAND_NAME", nullable = false)
-    private String brandName;
+	@Column(name = "BRAND_NAME", nullable = false)
+	private String brandName;
 
 
-    public Long getId() {
-        return id;
-    }
+	public Brand() {
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	}
 
-    public String getBrandCode() {
-        return brandCode;
-    }
+	public Brand(Long id) {
+		this.id = id;
+	}
 
-    public void setBrandCode(String brandCode) {
-        this.brandCode = brandCode;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getBrandName() {
-        return brandName;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
-    }
+	public String getBrandCode() {
+		return brandCode;
+	}
+
+	public void setBrandCode(String brandCode) {
+		this.brandCode = brandCode;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
 }

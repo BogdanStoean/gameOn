@@ -9,42 +9,49 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "CATEGORIES")
-public class Category implements Serializable{
+public class Category implements Serializable {
 
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORY_SEQ_GEN")
-    @SequenceGenerator(name = "CATEGORY_SEQ_GEN", sequenceName = "SEQ_CATEGORY", allocationSize = 1)
-    private Long id;
+	@Id
+	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CATEGORY_SEQ_GEN")
+	@SequenceGenerator(name = "CATEGORY_SEQ_GEN", sequenceName = "SEQ_CATEGORY", allocationSize = 1)
+	private Long id;
 
-    @Column(name = "CATEGORY_CODE", nullable = false)
-    private String categoryCode;
+	@Column(name = "CATEGORY_CODE", nullable = false)
+	private String categoryCode;
 
-    @Column(name = "CATEGORY_NAME", nullable = false)
-    private String categoryName;
+	@Column(name = "CATEGORY_NAME", nullable = false)
+	private String categoryName;
 
 
-    public Long getId() {
-        return id;
-    }
+	public Category() {
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Category(Long id) {
+		this.id = id;
+	}
 
-    public String getCategoryCode() {
-        return categoryCode;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setCategoryCode(String categoryCode) {
-        this.categoryCode = categoryCode;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getCategoryName() {
-        return categoryName;
-    }
+	public String getCategoryCode() {
+		return categoryCode;
+	}
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 }

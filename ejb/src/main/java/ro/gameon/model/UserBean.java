@@ -17,6 +17,7 @@ public class UserBean {
 	public UserBean(Long userId, String username, String role) {
 		this.userId = userId;
 		this.username = username;
+		this.role = role;
 	}
 
 	public UserBean(User user) {

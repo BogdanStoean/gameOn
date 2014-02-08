@@ -13,6 +13,7 @@ public class LoginBean implements Serializable {
 
 	private UserBean userBean;
 	private Set<Long> shoppingCart = new HashSet<Long>();
+	private int shoppingCartSize = 0;
 
 
 	public UserBean getUserBean() {
@@ -29,5 +30,13 @@ public class LoginBean implements Serializable {
 
 	public void setShoppingCart(Set<Long> shoppingCart) {
 		this.shoppingCart = shoppingCart;
+	}
+
+	public int getShoppingCartSize() {
+		return shoppingCart.size();
+	}
+
+	public void setShoppingCartSize(int shoppingCartSize) {
+		this.shoppingCartSize = shoppingCartSize;
 	}
 }
