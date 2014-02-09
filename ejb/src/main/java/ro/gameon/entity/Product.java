@@ -23,13 +23,13 @@ public class Product implements Serializable {
 	@Column(name = "PRODUCT_NAME", nullable = false)
 	private String productName;
 
-	@Column(name = "DESCRIPTION")
+	@Column(name = "DESCRIPTION", length = 10000)
 	private String description;
 
-	@Column(name = "PICTURE_LINK")
+	@Column(name = "PICTURE_LINK", length = 1000)
 	private String pictureLink;
 
-	@Column(name = "BANNER_LINK")
+	@Column(name = "BANNER_LINK", length = 1000)
 	private String bannerLink;
 
 	@Column(name = "PRICE")
