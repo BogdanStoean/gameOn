@@ -22,7 +22,7 @@ public class SaveProductServiceBean implements SaveProductService {
 	private ProductService productService;
 
 	@Override
-	public Long saveContact(ProductBean productBean) {
+	public Long save(ProductBean productBean) {
 		return productService.saveProduct(getProductFromBean(productBean));
 	}
 

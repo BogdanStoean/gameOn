@@ -20,5 +20,5 @@ public interface SaveProductService {
 	@POST
 	@Consumes("application/json")
 	@Path("/saveProduct.json")
-	public Long saveContact(ProductBean productBean);
+	public Long save(ProductBean productBean);
 }
