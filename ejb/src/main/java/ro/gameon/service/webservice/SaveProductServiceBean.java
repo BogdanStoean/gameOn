@@ -24,6 +24,7 @@ public class SaveProductServiceBean implements SaveProductService {
 	@Override
 	public Long save(ProductBean productBean) {
 		return productService.saveProduct(getProductFromBean(productBean));
+
 	}
 
 
